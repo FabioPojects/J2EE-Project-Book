@@ -78,5 +78,20 @@ public class BookDAO {
             e.printStackTrace();
         }
     }
+    
+    public void update(Book book) {
+        String sql = "UPDATE books SET title = ?, author = ? WHERE id = ?";
+        try (Connection c = DriverManager.getConnection(URL, USER, PASSWORD);
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            ps.setString(1, book.getTitle());
+            ps.setString(2, book.getAuthor());
+            ps.setLong(3, book.getId());
+            ps.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
